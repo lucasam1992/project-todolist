@@ -7,7 +7,7 @@ O projeto consiste em uma lista de tarefas. O usuário poderá adicionar, remove
 - HTML
 - CSS
 - DOM
--Javascript
+- Javascript
 
 ## Habilidades
 
