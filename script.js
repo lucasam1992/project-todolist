@@ -19,7 +19,7 @@ function adicionarItem() {
 }
 adicionarItem();
 
-function alterarCorFundoDoItem(){
+function alterarCorFundoDoItem() {
   const criarTopico = document.querySelector('section');
 
   criarTopico.addEventListener('click', function(event) {
@@ -107,6 +107,7 @@ function botaoSalvar() {
 
   saveButton.addEventListener('click', function(event) {
     localStorage.setItem('tarefas', allTasks.innerHTML);
+    alert('As tarefas foram salvas !!!')
   });
 }
 
@@ -119,16 +120,20 @@ function botaoUp() {
   const localizacaoButton = document.querySelector('section');
   localizacaoButton.appendChild(upButton);
 
-  const allTasks = document.querySelectorAll('li');
-  const itemRiscado = document.getElementsByClassName('completed');
-
   upButton.addEventListener('click', function(event) {
-    for (let index = 0; index < allTasks.length; index += 1) {
-      if(allTasks[index].classList.contains('selected')){
+    const taskList = document.querySelectorAll('li');
+    for (let index = 0; index < taskList.length; index += 1) {
+      if (taskList[index].style.backgroundColor === 'rgb(128, 128, 128)' && index > 0) {
+        auxInitialPosition = taskList[index].innerText;
+        auxNextPosition = taskList[index - 1].innerText;
+
+        taskList[index].innerText = auxNextPosition;
+        taskList[index - 1].innerText = auxInitialPosition;
+        taskList[index].style.backgroundColor = 'rgb(255,255,255)';
+        taskList[index - 1].style.backgroundColor = 'rgb(128, 128, 128)';
       }
     }
   });
-
 };
 
 botaoUp();
@@ -140,8 +145,21 @@ function botaoDown() {
   const localizacaoButton = document.querySelector('section');
   localizacaoButton.appendChild(downButton);
 
-  
+  downButton.addEventListener('click', function(event) {
+    const taskList = document.querySelectorAll('li');
+    for (let index = 0; index < taskList.length; index += 1){
+      if(taskList[index].style.backgroundColor === 'rgb(128, 128, 128)' && index < (taskList.length -1)){
+        auxInitialPosition = taskList[index].innerText;
+        auxNextPosition = taskList[index + 1].innerText;
 
+        taskList[index].innerText = auxNextPosition;
+        taskList[index + 1].innerText = auxInitialPosition;
+        taskList[index].style.backgroundColor = 'rgb(255,255,255)';
+        taskList[index + 1].style.backgroundColor = 'rgb(128, 128, 128)';
+        return;
+      }
+    }
+  });
 };
 
 botaoDown();
