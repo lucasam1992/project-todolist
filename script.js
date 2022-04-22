@@ -28,10 +28,8 @@ function alterarCorFundoDoItem() {
     for(let index = 0; index < pegaLinha.length; index += 1){
       if(pegaLinha[index] !== event.target){
         pegaLinha[index].style.backgroundColor = 'rgb(255,255,255)';
-        pegaLinha[index].classList.remove('selected');
       }else{
         pegaLinha[index].style.backgroundColor = 'rgb(128,128,128)';
-        pegaLinha[index].classList.add('selected');
       }
     }
   }
@@ -96,6 +94,26 @@ function removerItemCompletado() {
 
 removerItemCompletado();
 
+function removeSelected() {
+  const buttonRemoveSelected = document.createElement('button');
+  buttonRemoveSelected.id = 'remover-selecionado';
+  buttonRemoveSelected.innerHTML = 'Remover Selecionado';
+  const localizacaoButton = document.querySelector('section');
+  localizacaoButton.appendChild(buttonRemoveSelected);
+
+  buttonRemoveSelected.addEventListener('click', function(event) {
+    const taskList = document.querySelectorAll('li');
+    for (let index = 0; index < taskList.length; index += 1) {
+      const olList = document.querySelector('ol');
+      if(taskList[index].style.backgroundColor === 'rgb(128, 128, 128)') {
+        olList.removeChild(taskList[index]); 
+      }
+    }
+  });
+};
+
+removeSelected();
+
 function botaoSalvar() {
   const saveButton = document.createElement('button');
   saveButton.id = 'salvar-tarefas';
@@ -156,7 +174,7 @@ function botaoDown() {
         taskList[index + 1].innerText = auxInitialPosition;
         taskList[index].style.backgroundColor = 'rgb(255,255,255)';
         taskList[index + 1].style.backgroundColor = 'rgb(128, 128, 128)';
-        return;
+        break;
       }
     }
   });
