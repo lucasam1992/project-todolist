@@ -9,7 +9,7 @@ https://lucasam1992.github.io/project-todolist/
 - HTML
 - CSS
 - DOM
-- Javascript
+- Javascript - Vanilla.js
 
 ## Habilidades
 
